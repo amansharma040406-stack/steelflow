@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 from backend.app.models.camera import Camera 
+from backend.app.databse import engine, Base
+
+Base.metadata.create_all(bind=engine)
+
 app=FastAPI()
 @app.get("/health")
 def home():
