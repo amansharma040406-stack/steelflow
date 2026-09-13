@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from backend.app.models.camera import Camera 
-from backend.app.databse import engine, Base
+from .models.camera import Camera # . = current package (app)
+from .database import engine, Base
 
 Base.metadata.create_all(bind=engine)
 
@@ -11,16 +11,16 @@ def home():
 @app.get("/cameras")
 def get_camera():
     camera1=Camera(
-        1,
-        "camera 1",
-        "gate A",
-        True
+        id=1,
+        name="camera 1",
+        location="gate A",
+        is_active=True
     )
-    camera2=Camera(
-        2,
-        "camera 2",
-        "gate B",
-        True
+    camera2= Camera(
+        id=2,
+        name="camera 2",
+        location="gate B",
+        is_active=True
     )
     return[
         {

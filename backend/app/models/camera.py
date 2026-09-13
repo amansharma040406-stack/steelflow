@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean
-from backend.app.database import Base
+from ..database import Base  # .. = go up one package (app → backend)
 class Camera(Base):
     __tablename__ ="cameras"
     id=Column(Integer, primary_key=True, index=True)
