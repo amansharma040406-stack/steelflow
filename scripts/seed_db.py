@@ -7,6 +7,7 @@ db = SessionLocal()
 
 camera1 = Camera(
     id=1,
+    camera_uid="CAM-001",
     name="camera 1",
     location="gate A",
     is_active=True
@@ -14,6 +15,7 @@ camera1 = Camera(
 
 camera2 = Camera(
     id=2,
+    camera_uid="CAM-002",
     name="camera 2",
     location="gate B",
     is_active=True

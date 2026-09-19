@@ -3,6 +3,7 @@ from ..database import Base  # .. = go up one package (app → backend)
 class Camera(Base):
     __tablename__ ="cameras"
     id=Column(Integer, primary_key=True, index=True)
+    camera_uid = Column(String, unique=True, nullable=False)
     name=Column(String, nullable=False)
     location=Column(String, nullable=False)
     is_active=Column(Boolean, default=True)
