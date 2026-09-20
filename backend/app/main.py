@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from .models.camera import Camera
 from .database import SessionLocal, engine, Base
 from .schemas.camera import CameraCreate, CameraResponse
+from fastapi import FastAPI, Depends, HTTPException
 
 Base.metadata.create_all(bind=engine)
 
@@ -70,3 +71,12 @@ def create_camera(camera: CameraCreate, db: Session = Depends(get_db)):
         "location": new_camera.location,
         "is_active": new_camera.is_active
     }
+@app.get("/cameras/{camera_id}", response_model=CameraResponse)
+def get_camera_by_id(camera_id: int, db: Session = Depends(get_db)):
+
+    camera = db.query(Camera).filter(Camera.id == camera_id).first()
+
+    if camera is None:
+        raise HTTPException(status_code=404, detail="Camera not found")
+
+    return camera
