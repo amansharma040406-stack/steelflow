@@ -14,4 +14,8 @@ class CameraResponse(BaseModel):
     name: str
     location: str
     is_active: bool
-    
+
+class CameraUpdate(BaseModel):
+    name: str
+    location: str
+    is_active:bool= True
