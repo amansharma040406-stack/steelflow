@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from .models.camera import Camera
 from .database import SessionLocal, engine, Base
-from .schemas.camera import CameraCreate, CameraResponse
+from .schemas.camera import CameraCreate, CameraResponse, CameraUpdate
 from fastapi import FastAPI, Depends, HTTPException
 
 Base.metadata.create_all(bind=engine)
@@ -80,3 +80,23 @@ def get_camera_by_id(camera_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Camera not found")
 
     return camera
+
+@app.put("/camera/{camera_id}", response_model=CameraResponse)
+def update_camera(
+    camera_id:int,
+    camera_data:CameraUpdate,
+    db:Session=Depends(get_db)
+
+):
+    camera = db.query(Camera).filter(Camera.id == camera_id).first()
+    if camera is None:
+            raise HTTPException(status_code=404, detail="Camera not found")
+    camera.name = camera_data.name
+    camera.location=camera_data.location
+    camera.is_active=camera_data.is_active
+
+    db.commit()
+    db.refresh(camera)
+
+    return camera
+
