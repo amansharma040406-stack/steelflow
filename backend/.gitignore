@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+steelflow.db
+
+.venv/
+venv/
+env/
+
+.vscode/
