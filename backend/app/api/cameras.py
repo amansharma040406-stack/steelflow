@@ -2,18 +2,11 @@ from fastapi import APIRouter
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from ..database import SessionLocal
+from ..dependencies import get_db
 from ..models.camera import Camera
 from ..schemas.camera import CameraCreate, CameraResponse, CameraUpdate
 
 router = APIRouter()
-#move get_db() out of main.py
-def get_db():
-    db=SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 # GET ALL CAMERAS
 @router.get("/cameras", response_model=list[CameraResponse])
