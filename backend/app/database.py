@@ -3,5 +3,9 @@ from sqlalchemy.orm import declarative_base #gives foundation for database model
 from sqlalchemy.orm import sessionmaker
 DATABASE_URL="sqlite:///./steelflow.db" #says our db is sqlite file called steelflow.db
 engine=create_engine(DATABASE_URL) #creates database engine
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
 Base=declarative_base() #creates base that future orm will inherit
-SessionLocal=sessionmaker(bind=engine)
