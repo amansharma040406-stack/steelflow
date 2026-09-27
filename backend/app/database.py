@@ -9,3 +9,4 @@ SessionLocal = sessionmaker(
     bind=engine
 )
 Base=declarative_base() #creates base that future orm will inherit
+Base.metadata.create_all(bind=engine)
