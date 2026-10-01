@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class CameraCreate(BaseModel):
@@ -14,6 +15,7 @@ class CameraResponse(BaseModel):
     name: str
     location: str
     is_active: bool
+    created_at:datetime 
 
 class CameraUpdate(BaseModel):
     name: str
