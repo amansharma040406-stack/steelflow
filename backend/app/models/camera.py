@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, func
 from ..database import Base  # .. = go up one package (app → backend)
 class Camera(Base):
     __tablename__ ="cameras"
@@ -7,4 +7,4 @@ class Camera(Base):
     name=Column(String, nullable=False)
     location=Column(String, nullable=False)
     is_active=Column(Boolean, default=True)
-    created_at=Column(DateTime, nullable=True)
+    created_at = Column(DateTime, server_default=func.now(), nullable=False)
