@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     database_url:str="sqlite:///./steelflow.db"
+    app_name: str="STEELFLOW"
     model_config=SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8"
